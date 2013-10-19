@@ -8,7 +8,7 @@ gallery/select/1.4/index
  * manage a list of single-select options
  * @author yiminghe@gmail.com
  */
-KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu, undefined) {
+KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
     var $ = Node.all;
     var Select = MenuButton.Select;
     var PREFIX_CLS = 'bf-';
@@ -42,7 +42,6 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu, undefi
                     children: []
                 }
             };
-
             options.each(function (option) {
                 var item = {
                     xclass: 'option',
@@ -80,9 +79,7 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu, undefi
                     $target.fire('change');
                     self.fire("valueChange",{value:e.newVal,$select:$target});
                 })
-            })
-            self._bind();
-            self.fire('render');
+            });
         },
         _bind:function(){
             var self = this;
@@ -123,7 +120,8 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu, undefi
                     self.set('content',itemConfig.content);
                 }
             });
-            self.fire('sync');
+            self._bind();
+            self.fire('render');
         }
     },{ATTRS:{
         target:{
