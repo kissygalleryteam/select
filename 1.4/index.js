@@ -70,7 +70,14 @@ KISSY.add(function (S, Node, MenuButton, Menu) {
                 //TODO:IE6存在bug，无法选中，所以加个延迟
                 S.later(function(){
                     $target.val(e.newVal || "");
-                    $target.fire('change');
+                    var isSync = self.get('isSync');
+                    if(e.newVal != null){
+                        if(!isSync){
+                            $target.fire('change');
+                        }else{
+                            self.set('isSync',false);
+                        }
+                    }
                     self.fire("valueChange",{value:e.newVal,$select:$target});
                 })
             });
@@ -116,6 +123,8 @@ KISSY.add(function (S, Node, MenuButton, Menu) {
             });
             self._bind();
             self.fire('render');
+            self.set('isSync',true);
+            return self;
         }
     },{ATTRS:{
         target:{
@@ -123,7 +132,8 @@ KISSY.add(function (S, Node, MenuButton, Menu) {
             getter:function(v){
                 return $(v);
             }
-        }
+        },
+        isSync:{ value: false }
     }})
     return ButterflySelect;
 
