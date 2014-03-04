@@ -1,7 +1,7 @@
 {
     "name": "select",
-    "version": "1.4",
-    "desc": "模拟选择框组件（测试中，请勿使用）",
+    "version": "1.5",
+    "desc": "增强模拟选择框组件",
     "cover": "",
     "tag":"",
     "author": {
