@@ -1,14 +1,14 @@
 /*
 combined files : 
 
-gallery/select/1.4/index
+gallery/select/1.5/index
 
 */
 /**
  * manage a list of single-select options
  * @author yiminghe@gmail.com
  */
-KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
+KISSY.add('gallery/select/1.5/index',function (S, Node, MenuButton, Menu) {
     var $ = Node.all;
     var Select = MenuButton.Select;
     var PREFIX_CLS = 'bf-';
@@ -80,19 +80,19 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
                     self.fire("valueChange",{value:e.newVal,$select:$target});
                 })
             });
-        },
-        _bind:function(){
-            var self = this;
+
             var menu = self.get('menu');
-            if(S.isEmptyObject(menu)) return false;
-            var el = menu.get('el');
-            if(!el || !el.length) return false;
-            el.on('mouseover',function(ev){
-                var $target = $(ev.target);
-                if($target.hasClass('bf-menuitem')){
+            menu.on('afterRenderUI',function(ev){
+                //将Item实例缓存到div上
+                var item = ev.target;
+                var $el = item.$el;
+                $el.data(DATA_ITEM,item);
+                //鼠标滑过元素派发over事件
+                $el.on('mouseover',function(ev){
+                    var $target = $(ev.target);
                     var item = $target.data(DATA_ITEM);
                     self.fire('itemMouseover',{$item:$target,item:item});
-                }
+                })
             })
         },
         /**
@@ -112,15 +112,11 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
                 var $target = itemConfig.elOption;
                 if($target) item.set('target',$target);
                 self.addItem(item);
-                //将Item实例缓存到div上
-                var el = item.get('el');
-                el.data(DATA_ITEM,item);
                 if(itemConfig.value == selectedItem.value){
                     self.set('value',itemConfig.value);
                     self.set('content',itemConfig.content);
                 }
             });
-            self._bind();
             self.fire('render');
             self.set('isSync',true);
             return self;
