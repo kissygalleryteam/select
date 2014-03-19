@@ -8,7 +8,7 @@ gallery/select/1.4/index
  * manage a list of single-select options
  * @author yiminghe@gmail.com
  */
-KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
+KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu,UA) {
     var $ = Node.all;
     var Select = MenuButton.Select;
     var PREFIX_CLS = 'bf-';
@@ -72,13 +72,23 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
             if(!$target.length) return false;
             $target.hide();
             self.sync();
+
+            function _set(e){
+                $target.val(e.newVal || "");
+                $target.fire('change');
+                self.fire("valueChange",{value:e.newVal,$select:$target});
+            }
+
             self.on("afterValueChange", function (e) {
-                //TODO:IE6存在bug，无法选中，所以加个延迟
-                S.later(function(){
-                    $target.val(e.newVal || "");
-                    $target.fire('change');
-                    self.fire("valueChange",{value:e.newVal,$select:$target});
-                })
+                if(UA.ie <= 6){
+                    //TODO:IE6存在bug，无法选中，所以加个延迟
+                    S.later(function(){
+                        _set(e);
+                    })
+                }else{
+                    _set(e);
+                }
+
             });
         },
         _bind:function(){
@@ -136,7 +146,7 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu) {
     return ButterflySelect;
 
 }, {
-    requires: ['node', 'menubutton', 'menu']
+    requires: ['node', 'menubutton', 'menu','ua']
 });
 
 /**
