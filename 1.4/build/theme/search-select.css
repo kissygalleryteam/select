@@ -43,7 +43,7 @@
   color: #f60;
   font-weight: bold;
 }
-.bf-search-text {
+.bf-select .bf-search-text {
   position: absolute;
   border: 0;
   top: 0;
