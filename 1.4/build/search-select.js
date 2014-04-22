@@ -159,7 +159,6 @@ KISSY.add('gallery/select/1.4/index',function (S, Node, MenuButton, Menu,UA) {
  */
 KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
     var $ = Node.all;
-
     function SearchSelect(target,config){
         var self = this;
 
@@ -175,6 +174,7 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
             var $el = self.get('el');
             var $input = self.get('input');
             var prefixCls = self.get('prefixCls');
+            var menu = self.get('menu');
             $input.addClass(prefixCls+'search-text').val(self.get('content'));
             $el.append($input);
 
@@ -184,11 +184,13 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
             });
             $input.on('focus',function(){
                 $input.val('');
-                self.get('menu').show();
+                menu.show();
+                menu.set('width',$el.innerWidth());
+                menu.align($el,["bl", "tl"],self.get("menuCfg").align.offset);
             })
             $input.on('blur',function(){
                 $input.val(self.get('content'));
-                self.get('menu').hide();
+                menu.hide();
             })
         },
         _searchHandler:function(ev){
@@ -205,7 +207,6 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
                 prefixCls = self.get('prefixCls');
             var menu = self.get('menu');
             var children = menu.get('children');
-            var isHide = true;
             // 过滤所有子组件
             S.each(children, function (c) {
                 var content = c.get('content');
@@ -214,14 +215,12 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
                     // 恢复原有内容
                     // 显示出来
                     c.set('visible', true);
-                    isHide = false;
                     menu.show();
                 } else {
                     if (content.indexOf(str) > -1) {
                         // 如果符合过滤项
                         // 显示
                         c.set('visible', true);
-                        isHide = false;
                     } else {
                         // 不符合
                         // 隐藏
@@ -229,7 +228,6 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
                     }
                 }
             });
-            isHide && menu.hide();
         }
     },{ATTRS:{
         target:{

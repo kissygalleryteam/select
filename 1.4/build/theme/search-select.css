@@ -51,6 +51,9 @@
   padding: 6px 8px;
   width: 80%;
 }
+.bf-select .bf-search-text:focus {
+  outline: none;
+}
 .bf-menuitem-hidden {
   display: none;
 }
