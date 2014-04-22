@@ -175,6 +175,11 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
             var $input = self.get('input');
             var prefixCls = self.get('prefixCls');
             var menu = self.get('menu');
+            menu.on('show',function(){
+                menu.set('width',$el.innerWidth());
+                menu.set('height',self.get('menuCfg').height);
+                menu.align($el,["bl", "tl"],self.get("menuCfg").align.offset);
+            })
             $input.addClass(prefixCls+'search-text').val(self.get('content'));
             $el.append($input);
 
@@ -185,8 +190,6 @@ KISSY.add('gallery/select/1.4/search-select',function (S, Node,Select) {
             $input.on('focus',function(){
                 $input.val('');
                 menu.show();
-                menu.set('width',$el.innerWidth());
-                menu.align($el,["bl", "tl"],self.get("menuCfg").align.offset);
             })
             $input.on('blur',function(){
                 $input.val(self.get('content'));
