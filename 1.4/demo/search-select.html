@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>select的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+</head>
+<body>
+<h2>select的demo</h2>
+
+<div style="padding:20px;">
+    <input type="text" class="J_Search" name="search" autocomplete="false">
+    <select name="service-type" id="J_ServiceType">
+        <option value="0">仅退款<span>（不退货）</span></option>
+        <option value="1">退货退款</option>
+        <option value="2">换货</option>
+        <option value="3">维修</option>
+        <option value="4">补寄</option>
+        <option value="5">123</option>
+    </select>
+</div>
+
+<script>
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('gallery/select/1.4/search-select,gallery/select/1.4/theme/search-select.css', function (S, Select) {
+        var select = new Select('#J_ServiceType', {
+                    input:'.J_Search',
+                    width:200,
+                    // 设置对齐方式, 与普通的 Align 大体一致
+                    // 该配置同菜单配置项
+                    menuCfg:{
+                        align:{
+                            offset:[0, -1]
+                        },
+                        height:150,
+                        elStyle:{
+                            overflow:"auto",
+                            overflowX:"hidden"
+                        }
+                    }}
+        )
+        select.render();
+    })
+</script>
+</body>
+</html>
