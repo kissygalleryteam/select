@@ -1,7 +1,3 @@
-/**
- * manage a list of single-select options
- * @author yiminghe@gmail.com
- */
 KISSY.add(function (S, Node, MenuButton, Menu) {
     var $ = Node.all;
     var Select = MenuButton.Select;
@@ -128,8 +124,3 @@ KISSY.add(function (S, Node, MenuButton, Menu) {
 }, {
     requires: ['node', 'menubutton', 'menu']
 });
-
-/**
- * TODO
- *  how to emulate multiple ?
- **/

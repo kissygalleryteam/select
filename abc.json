@@ -1,14 +1,11 @@
 {
     "name": "select",
-    "version": "1.4",
+    "version": "1.5",
     "desc": "增强模拟选择框组件",
     "cover": "",
-    "tag":"",
+    "tag":"表单",
     "author": {
         "name": "明河",
-        "email": "minghe12@126.com",
-        "page": ""
-    },
-    "type": "kissy-gallery",
-    "type-url": "http://gallery.kissyui.com/guide"
+        "email": "minghe12@126.com"
+    }
 }
