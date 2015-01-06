@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>select</title>
+    <link rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com-prettify.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.css">
+    <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.staticfile.org/prettify/r298/prettify.min.js"></script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.8/seed-min.js" data-config="{combine:true}"></script>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <div id="header"><a href="http://docs.kissyui.com/" class="logo">kissy</a>
+      <nav><a href="http://docs.kissyui.com/1.4/docs/html/coms.html">优秀组件推荐</a></nav>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar">
+          <ul data-spy="affix" data-offset-top="0" class="nav nav-list bs-docs-sidenav"></ul>
+        </div>
+        <div class="span9 bs-docs-content">
+          <h1 data-id="undefined" class="title">select</h1>
+          <p class="author-wrapper"><span>组件有问题？旺旺联系作者：</span><a href="https://github.com/minghe" target="_blank" data-name="剑平" class="author"><img src="https://avatars.githubusercontent.com/u/724588?v=3&amp;s=60" alt="剑平"></a><span class="author-name">剑平</span>
+          </p>
+          <div class="common-link"><a href="../demo/index.html" target="_blank" class="demo">示例</a><a href="https://github.com/kissygalleryteam/select" target="_blank" class="source">源码</a></div>
+          <p class="com-info"><span class="info-label">View</span><span data-com="select" class="J_View">1166</span></p>
+          <p class="com-info"><span class="info-label">所属分类</span><a href="http://kpm.taobao.net/list/表单">表单</a><span class="info-label tag-label">组件标签</span><a href="http://kpm.taobao.net/list/tag?tag=表单">表单</a>
+          </p>
+          <p class="com-info"><span class="info-label">kissy版本</span><span>1.4.X</span>
+          </p><h2 id="-">综述</h2>
+<p>select是模拟选择框组件，与menubutton的select的区别是不删除原生选择框，同时做了功能增强。</p>
+<p>v1.5 版支持kissy1.4.X</p>
+<h2 id="-">快速使用</h2>
+<h3 id="html">html</h3>
+<pre><code>&lt;select name=&quot;service-type&quot; id=&quot;J_ServiceType&quot;&gt;
+    &lt;option value=&quot;0&quot;&gt;仅退款&lt;span&gt;（不退货）&lt;/span&gt;&lt;/option&gt;
+    &lt;option value=&quot;1&quot;&gt;退货退款&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;换货&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;维修&lt;/option&gt;
+    &lt;option value=&quot;4&quot;&gt;补寄&lt;/option&gt;
+&lt;/select&gt;
+</code></pre><h3 id="-">初始化组件</h3>
+<pre><code>S.use(&#39;kg/select/2.0.1/index,kg/select/2.0.1/theme/default.css&#39;, function (S, Select) {
+    var select = new Select(&#39;#J_ServiceType&#39;, {
+                width:200,
+                // 设置对齐方式, 与普通的 Align 大体一致
+                // 该配置同菜单配置项
+                menuCfg:{
+                    align:{
+                        offset:[0, -1]
+                    },
+                    height:150,
+                    elStyle:{
+                        overflow:&quot;auto&quot;,
+                        overflowX:&quot;hidden&quot;
+                    }
+                }}
+    )
+    select.on(&#39;valueChange&#39;,function(ev){
+        var $select = ev.$select;
+        S.log($select[0].value);
+    })
+    select.render();
+})
+</code></pre><p>如果你的选择框内容发生变化，需要调用<strong>select.sync();</strong>同步下数据:</p>
+<pre><code>S.one(&#39;.J_Sync&#39;).on(&#39;click&#39;,function(){
+    S.one(&#39;#J_ServiceType&#39;).html(&#39;&lt;option value=&quot;1&quot; selected&gt;新的数据1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;新的数据2&lt;/option&gt;&#39;);
+    select.sync();
+})
+</code></pre>
+          <div style="display:none;"><script type="text/javascript" src="http://tajs.qq.com/stats?sId=36378479" charset="UTF-8"></script></div>
+          <script src="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
